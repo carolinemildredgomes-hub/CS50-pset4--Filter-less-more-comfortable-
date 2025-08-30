@@ -1,0 +1,108 @@
+# 🖼️ CS50 Filter (Less & More)
+
+## 📘 Overview
+This project is part of **CS50’s Problem Set 4**.  
+It introduces **image processing in C** by manipulating pixels in BMP files.  
+There are two variations of the assignment:
+
+- **Filter (Less)** → implement grayscale, sepia, reflect, and blur.  
+- **Filter (More)** → implement grayscale, reflect, blur, and edges (Sobel operator).  
+
+The goal is to practice working with structs, arrays, and nested loops while applying algorithms to digital images.
+
+---
+
+## 📂 Project Structure
+- `filter.c` → handles command-line options and calls filter functions.  
+- `helpers.c` → **your code goes here** (implement filters).  
+- `helpers.h` → function prototypes.  
+- `bmp.h` → BMP format definitions (provided).  
+- `Makefile` → build configuration.  
+- `images/` → test BMP images.
+
+---
+
+## 📝 Filter (Less)
+### Filters to Implement
+1. **Grayscale** → convert each pixel to the average of its RGB values.  
+2. **Sepia** → apply sepia-tone formula:  
+
+
+sepiaRed = .393R + .769G + .189B
+sepiaGreen = .349R + .686G + .168B
+sepiaBlue = .272R + .534G + .131*B
+
+(Clamp values at 255.)  
+3. **Reflect** → flip image horizontally.  
+4. **Blur** → replace each pixel with the average of its surrounding pixels.
+
+### Compile & Run
+```bash
+make filter
+./filter -g images/yard.bmp gray.bmp      # grayscale
+./filter -s images/yard.bmp sepia.bmp     # sepia
+./filter -r images/yard.bmp reflect.bmp   # reflect
+./filter -b images/yard.bmp blur.bmp      # blur
+
+Filter (More)
+Filters to Implement
+
+Grayscale → same as in Filter (Less).
+
+Reflect → same as in Filter (Less).
+
+Blur → same as in Filter (Less).
+
+Edges → apply the Sobel operator:
+
+Compute Gx and Gy for each pixel.
+
+Final value = sqrt(Gx² + Gy²) (clamped to 255).
+
+make filter
+./filter -g images/yard.bmp gray.bmp      # grayscale
+./filter -r images/yard.bmp reflect.bmp   # reflect
+./filter -b images/yard.bmp blur.bmp      # blur
+./filter -e images/yard.bmp edges.bmp     # edges (Sobel)
+
+How to Solve
+
+Edit only helpers.c.
+
+Use nested for loops to iterate over each pixel.
+
+Be careful with boundaries:
+
+For blur and edges, pixels at the edges/corners have fewer neighbors.
+
+Always round floating-point results to the nearest integer.
+
+Clamp pixel values so they don’t exceed 255.
+
+Recompile and test frequently.
+
+🎯 Skills Practiced
+
+C programming basics (loops, conditionals, arrays).
+
+Working with structs (RGBTRIPLE).
+
+Implementing mathematical formulas.
+
+Image processing fundamentals (grayscale, sepia, blur, Sobel edges).
+
+Debugging with printf and visual testing using sample images.
+
+🖼️ Output Examples
+
+gray.bmp → grayscale version of yard.bmp.
+
+sepia.bmp → sepia-toned version (Filter Less).
+
+reflect.bmp → horizontally mirrored image.
+
+blur.bmp → softened image.
+
+edges.bmp → edge-detected image (Filter More).
+
+
